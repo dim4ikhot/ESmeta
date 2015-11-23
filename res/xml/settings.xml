@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+   <PreferenceScreen 
+       xmlns:android="http://schemas.android.com/apk/res/android" >
+       <EditTextPreference 
+           android:key="zmlpath"
+           android:summary="@string/ZML"                     
+           android:title="Путь к ZML" android:defaultValue="@string/ZML"/>
+       <EditTextPreference 
+           android:key="arppath"
+           android:summary="@string/ARP"
+           android:title="Путь к ARP"
+           android:defaultValue="@string/ARP"/>
+   </PreferenceScreen>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainActivityColor"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/posChildColor"        
+        android:layout_margin="2dp"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollPD"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+    		    
+	        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/posChildColor"   
+                android:orientation="vertical" >
+	        
+	            <LinearLayout
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"			
+			            android:background="@color/listItemPositionColor"            
+			            android:orientation="vertical">
+				
+	                <TextView
+				        android:id="@+id/tvProjName"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"	        
+				        android:layout_gravity="center_horizontal"
+				        android:textStyle="bold"
+				        android:text="@string/proj_name" />
+	                
+			    </LinearLayout>
+			    
+			    <TextView
+			        android:id="@+id/tvProjNameValue"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"	  
+			        android:layout_gravity="left"      
+			        android:text="TextView" />
+			    
+			     <LinearLayout
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"			
+			            android:background="@color/listItemPositionColor"            
+			            android:orientation="vertical">
+				     <TextView
+				        android:id="@+id/tvProjCipher"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"	        
+				        android:layout_gravity="center_horizontal"
+				        android:textStyle="bold"
+				        android:text="@string/proj_cipher" />
+			     </LinearLayout>
+			    
+			    <TextView
+			        android:id="@+id/tvProjCipherValue"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"	  
+			        android:layout_gravity="left"      
+			        android:text="TextView" />
+			    
+			    <LinearLayout
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"			
+			            android:background="@color/listItemPositionColor"            
+			            android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/tvProjCustomer"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"	        
+				        android:layout_gravity="center_horizontal"
+				        android:textStyle="bold"
+				        android:text="@string/proj_customer" />
+				</LinearLayout>    
+			    
+			    <TextView
+			        android:id="@+id/tvProjCustomerValue"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"	  
+			        android:layout_gravity="left"      
+			        android:text="TextView" />
+			    
+			    <LinearLayout
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"			
+			            android:background="@color/listItemPositionColor"            
+			            android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/tvProjContractor"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"	        
+				        android:layout_gravity="center_horizontal"
+				        android:textStyle="bold"
+				        android:text="@string/proj_contractor" />
+			    </LinearLayout>
+			    
+			    <TextView
+			        android:id="@+id/tvProjContractorValue"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"	  
+			        android:layout_gravity="left"      
+			        android:text="TextView" />
+			    
+			    <LinearLayout
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"			
+			            android:background="@color/listItemPositionColor"            
+			            android:orientation="vertical">
+				    <TextView
+				        android:id="@+id/tvProjTotal"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"	        
+				        android:layout_gravity="center_horizontal"
+				        android:textStyle="bold"
+				        android:text="@string/proj_total" />
+			    </LinearLayout>
+			    
+			    <TextView
+			        android:id="@+id/tvProjTotalValue"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"	  
+			        android:layout_gravity="left"      
+			        android:text="TextView" />
+			    
+		    </LinearLayout>
+	    </ScrollView>	
+    </LinearLayout>    
+    <LinearLayout 
+        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@color/posChildColor"
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"
+	        android:layout_marginBottom="2dp"
+	        android:gravity="bottom|center_horizontal"			            
+	        android:orientation="horizontal">
+        
+        <Button 
+            android:id="@+id/btnClosePD"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/view_pos_txt"	  
+            />
+        
+    </LinearLayout>
+</LinearLayout>

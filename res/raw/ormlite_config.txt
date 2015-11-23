@@ -1,0 +1,356 @@
+#
+# generated on 2015/10/26 04:02:23
+#
+# --table-start--
+dataClass=com.expertsoft.esmeta.data.LS
+tableName=ls
+# --table-fields-start--
+# --field-start--
+fieldName=lsId
+columnName=_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=lsProjectId
+columnName=projectid
+# --field-end--
+# --field-start--
+fieldName=lsOsId
+columnName=osid
+# --field-end--
+# --field-start--
+fieldName=lsHidden
+columnName=ls_hidden
+# --field-end--
+# --field-start--
+fieldName=lsName
+columnName=ls_name
+# --field-end--
+# --field-start--
+fieldName=lsCipher
+columnName=ls_cipher
+# --field-end--
+# --field-start--
+fieldName=lsSortId
+columnName=ls_sort_id
+# --field-end--
+# --field-start--
+fieldName=lsTotal
+columnName=ls_total
+# --field-end--
+# --field-start--
+fieldName=lsProjects
+canBeNull=false
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=lsOsTable
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.expertsoft.esmeta.data.OS
+tableName=os
+# --table-fields-start--
+# --field-start--
+fieldName=osId
+columnName=_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=osProjectId
+columnName=projectid
+# --field-end--
+# --field-start--
+fieldName=osName
+columnName=os_name
+# --field-end--
+# --field-start--
+fieldName=osCipher
+columnName=os_cipher
+# --field-end--
+# --field-start--
+fieldName=osSortId
+columnName=os_sort_id
+# --field-end--
+# --field-start--
+fieldName=osTotal
+columnName=os_total
+# --field-end--
+# --field-start--
+fieldName=osProjects
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.expertsoft.esmeta.data.Projects
+tableName=projects
+# --table-fields-start--
+# --field-start--
+fieldName=projId
+columnName=_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=projName
+columnName=proj_name
+# --field-end--
+# --field-start--
+fieldName=projCipher
+columnName=proj_cipher
+# --field-end--
+# --field-start--
+fieldName=projCreateDate
+columnName=proj_create_date
+# --field-end--
+# --field-start--
+fieldName=projCustomer
+columnName=proj_customer
+# --field-end--
+# --field-start--
+fieldName=projContractor
+columnName=proj_contractor
+# --field-end--
+# --field-start--
+fieldName=projSortId
+columnName=proj_sort_id
+# --field-end--
+# --field-start--
+fieldName=projTotal
+columnName=proj_total
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.expertsoft.esmeta.data.Works
+tableName=works
+# --table-fields-start--
+# --field-start--
+fieldName=workId
+columnName=_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=wProjectId
+columnName=projectid
+# --field-end--
+# --field-start--
+fieldName=wOsId
+columnName=osid
+# --field-end--
+# --field-start--
+fieldName=wLsId
+columnName=lsid
+# --field-end--
+# --field-start--
+fieldName=wParentId
+columnName=work_parent_id
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=wParentNormId
+columnName=work_parent_norm_id
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=wName
+columnName=work_name
+# --field-end--
+# --field-start--
+fieldName=wCipher
+columnName=work_cipher
+# --field-end--
+# --field-start--
+fieldName=wCipherObosn
+columnName=work_shifr_obosn
+# --field-end--
+# --field-start--
+fieldName=wRec
+columnName=work_rec
+# --field-end--
+# --field-start--
+fieldName=wPart
+columnName=work_part
+# --field-end--
+# --field-start--
+fieldName=wCount
+columnName=work_count
+# --field-end--
+# --field-start--
+fieldName=wMeasured
+columnName=work_measured
+# --field-end--
+# --field-start--
+fieldName=wStartDate
+columnName=work_date_start
+format=dd.mm.yyyy HH:nn
+# --field-end--
+# --field-start--
+fieldName=wEndDate
+columnName=work_date_end
+format=dd.mm.yyyy HH:nn
+# --field-end--
+# --field-start--
+fieldName=wCurrStateDate
+columnName=work_date_for_curr_state
+format=dd.mm.yyyy HH:nn
+# --field-end--
+# --field-start--
+fieldName=wPercentDone
+columnName=work_percent_done
+# --field-end--
+# --field-start--
+fieldName=wCountDone
+columnName=work_count_done
+# --field-end--
+# --field-start--
+fieldName=wTotal
+columnName=work_total
+# --field-end--
+# --field-start--
+fieldName=wNPP
+columnName=work_npp
+# --field-end--
+# --field-start--
+fieldName=wSortOrder
+columnName=work_sort_order
+# --field-end--
+# --field-start--
+fieldName=wItogo
+columnName=work_itogo
+# --field-end--
+# --field-start--
+fieldName=wZP
+columnName=work_zp
+# --field-end--
+# --field-start--
+fieldName=wMach
+columnName=work_mach
+# --field-end--
+# --field-start--
+fieldName=wZPMach
+columnName=work_zpmach
+# --field-end--
+# --field-start--
+fieldName=wZPTotal
+columnName=work_zptotal
+# --field-end--
+# --field-start--
+fieldName=wMachTotal
+columnName=work_machtotal
+# --field-end--
+# --field-start--
+fieldName=wZPMachTotal
+columnName=work_zpmachtotal
+# --field-end--
+# --field-start--
+fieldName=wTZ
+columnName=work_tz
+# --field-end--
+# --field-start--
+fieldName=wTZMach
+columnName=work_tzmach
+# --field-end--
+# --field-start--
+fieldName=wTZTotal
+columnName=work_tztotal
+# --field-end--
+# --field-start--
+fieldName=wTZMachTotal
+columnName=work_tzmachtotal
+# --field-end--
+# --field-start--
+fieldName=wNaklTotal
+columnName=work_nakltotal
+# --field-end--
+# --field-start--
+fieldName=wAdmin
+columnName=work_admin
+# --field-end--
+# --field-start--
+fieldName=wProfit
+columnName=work_profit
+# --field-end--
+# --field-start--
+fieldName=wProjectFK
+canBeNull=false
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=wOSFK
+canBeNull=false
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=wLSFK
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.expertsoft.esmeta.data.WorksResources
+tableName=worksresources
+# --table-fields-start--
+# --field-start--
+fieldName=workResId
+columnName=_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=wrWorkId
+columnName=workid
+# --field-end--
+# --field-start--
+fieldName=wrName
+columnName=workres_name
+# --field-end--
+# --field-start--
+fieldName=wrCipher
+columnName=workres_cipher
+# --field-end--
+# --field-start--
+fieldName=wrMeasured
+columnName=workres_measured
+# --field-end--
+# --field-start--
+fieldName=wrCount
+columnName=workres_count
+# --field-end--
+# --field-start--
+fieldName=wrCost
+columnName=workres_cost
+# --field-end--
+# --field-start--
+fieldName=wrTotalCost
+columnName=workres_totalcost
+# --field-end--
+# --field-start--
+fieldName=wrPart
+columnName=workres_part
+# --field-end--
+# --field-start--
+fieldName=wrWFK
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:id="@+id/worklayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+         <LinearLayout
+	        android:id="@+id/imgLayout"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:gravity="center_vertical"
+	        android:orientation="vertical" >
+	        <ImageView
+		       android:id="@+id/imgExpColl"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:src="@drawable/expand" />
+	    </LinearLayout>
+        <LinearLayout
+	        android:id="@+id/dataLayout"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical" >
+	        <TextView
+	            android:id="@+id/workName"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:ellipsize="none"
+			    android:singleLine="false"
+	            android:layout_gravity="left"
+	            android:textColor="@android:color/black"
+	            android:text="@string/NoLoadedProj"	            
+	            android:textSize="18sp" />
+	
+	        <LinearLayout
+	            android:id="@+id/layoutMainDescript"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	
+	            <LinearLayout
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content" 
+		            android:orientation="horizontal"
+		            android:id="@+id/layoutMeas"
+		            >
+		            <TextView
+		                android:id="@+id/worksMeasured"		               
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"
+		                android:layout_width="wrap_content" 	                
+		                android:text="@string/pos_measured" />
+		
+		            <TextView
+		                android:id="@+id/worksMeasuredValue"
+		                android:layout_width="wrap_content"
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"
+		                android:text="" />
+	            </LinearLayout>
+	            
+	            <LinearLayout
+	                android:id="@+id/layoutCount"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"		            
+		            android:layout_height="wrap_content" 
+		            android:orientation="horizontal">
+		            <TextView
+		                android:id="@+id/worksCount"		                
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"	
+		                android:layout_width="wrap_content"                
+		                android:text="@string/pos_сount" />
+		
+		            <TextView
+		                android:id="@+id/worksCountValue"
+		                android:layout_width="wrap_content"		                
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"
+		                android:text="" />	            	            
+	            </LinearLayout>
+	            
+	            <LinearLayout
+	                android:id="@+id/layoutTotal"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content" 
+		            android:orientation="horizontal">
+	            
+		            <TextView
+		                android:id="@+id/totalworkstxt"	                
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"	
+		                android:layout_width="wrap_content"                
+		                android:text="@string/worksTotal" />
+		
+		            <TextView
+		                android:id="@+id/workTotalNum"
+		                android:layout_width="wrap_content"
+		                android:textColor="@android:color/black"
+		                android:layout_height="wrap_content"
+		                android:text="" />
+	            
+	            </LinearLayout>
+	            
+	        </LinearLayout>
+	        
+        </LinearLayout>
+        
+    </LinearLayout>   
+
+</LinearLayout>

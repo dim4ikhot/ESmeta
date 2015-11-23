@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="expertsoft.com.ua.MainActivity" >
+    
+    
+    
+    <group 
+        android:id="@+id/MainGroup" 
+        android:visible="true" 
+        android:enabled="true">
+        <item 
+            android:id="@+id/OpenFormat" 
+            android:title="@string/FormatTitle" 
+            android:orderInCategory="1">
+            
+        </item>
+         <item 
+            android:id="@+id/AppSettings" 
+            android:title="@string/AppSettings" 
+            android:orderInCategory="2">
+            
+        </item>
+         <item 
+            android:id="@+id/about" 
+            android:title="@string/aboutProgram" 
+            android:orderInCategory="3">
+            
+        </item>
+         <item 
+             android:id="@+id/ExitApp" 
+             android:title="@string/ExitApp" 
+             android:orderInCategory="4">            
+         </item>
+        
+     </group>
+
+</menu>

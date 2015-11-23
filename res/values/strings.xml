@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Эксперт-Смета</string>
+    <string name="FormatTitle">Открыть</string>
+    <string name="AppSettings">Настройки</string>
+    <string name="NoLoadedProj">Нет загруженных строек</string>
+    <string name="ProjTotal">Всего по стройке:</string>
+    <string name="ZML">/Android/data/com.expertsoft.esmeta/ZML</string>
+    <string name="ARP">/Android/data/com.expertsoft.esmeta/ARP</string>
+    <string name="OsLsTotal">Всего по смете:</string>
+    <string name="ExitApp">Выход</string>
+    <string name="aboutProgram">О программе</string>
+    <string name="worksTotal">Всего:</string>
+    <string name="wrCounts">Кол-во:</string>
+    <string name="koefIs">Значение:</string>
+    <string name="wrCosts">Стоим.:</string>
+    <string name="view_pos_txt">OK</string>
+    <string name="LoadedBuildersCnt">Список строек</string>    
+    
+    <!-- For position info strings -->
+    <string name="pos_executing">Выполнение</string>
+    <string name="pos_start_executing">Начало</string>
+    <string name="pos_percent_executing">Выполнено(%)</string>
+    <string name="pos_cipher">Шифр:</string>
+    <string name="pos_name">Наименование:</string>
+    <string name="pos_сount">Кол-во:</string>
+    <string name="pos_measured">Ед.изм.:</string>
+    <string name="pos_price_by_one">Стоимость ед. грн.</string>
+    <string name="pos_total_by_one">Всего</string>
+    <string name="pos_zp_by_one">ЗП</string>
+    <string name="pos_use_machine_by_one">Эксплуатации машин</string>
+    <string name="pos_zp_machine_by_one">в т.ч. ЗП</string>
+    <string name="pos_total_price">Общая стоимость</string>
+    <string name="pos_price_total">Всего</string>
+    <string name="pos_zp_total">ЗП</string>
+    <string name="pos_use_machine_total">Экспл. машин</string>
+    <string name="pos_zp_machine_total">в т.ч. ЗП</string>
+    <string name="pos_use_machine_hours">Обслуж. машин</string>
+    <string name="pos_use_workers_hours">Затраты труда рабочих</string>
+    <string name="pos_use_hours_by_one">На ед.</string>
+    <string name="pos_use_hours_Total">Всего</string>
+    
+    <!-- For Project Detail -->
+    <string name="proj_name">Наименование</string>
+    <string name="proj_cipher">Шифр</string>
+    <string name="proj_customer">Заказчик</string>
+    <string name="proj_contractor">Подрядчик</string>
+    <string name="proj_total">Всего по стройке</string>
+    
+    
+	<!--     ad -->
+	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+	
+	<!-- 	about program -->
+	<string name="about_name">Эксперт-смета</string>
+    <string name="about_ver">Версия 1.0</string>
+    <string name="about_site">expertsoft.com.ua</string>
+    <string name="about_rights">© Все права защищены</string>
+  
+
+</resources>
