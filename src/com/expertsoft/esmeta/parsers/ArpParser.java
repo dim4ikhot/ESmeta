@@ -97,6 +97,7 @@ public class ArpParser {
 		String priorLine = "";
 		int priorID = 0;
 		double smetaTotal;
+		float partTotal;
 		try{
 			FileInputStream is = new FileInputStream(arpFile);
 			InputStreamReader inputreader = new InputStreamReader(is); 
@@ -126,6 +127,20 @@ public class ArpParser {
 						
 						projects.setProjectTotal(smetaTotal);
 						addProjects(projects);
+					}
+					if(dataList.get(1).contains("Итого по разделу")){
+						String[] total = dataList.get(1).split("\\s+");
+						if(!total[total.length-1].replace(",", ".").equals("")){
+							DecimalFormat df = new DecimalFormat("0.###");
+							Number num =  df.parse(total[total.length-1].replace(",", "."));
+							partTotal = num.floatValue();
+							//smetaTotal = Double.parseDouble(total[total.length-1].replace(",", "."));
+						}else{
+							partTotal = 0;
+						}
+						
+						works.setWTotal(partTotal);
+						updateWorks(works);
 					}
 					break;
 				case "3":// Project
@@ -198,6 +213,10 @@ public class ArpParser {
 					priorID = works.getWorkId();
 					break;
 				case "20"://Norms(Норма)
+					if(globalNPP == 11)
+					{
+						globalNPP = 11;
+					}
 					boolean isWorkRes = isNextNormResource(i+1);					
 					String strForParse = "";
 					switch(PosZP.operation){
@@ -260,7 +279,9 @@ public class ArpParser {
 					if(rec != null){
 						if(rec.contains("record")){
 							parentNormID = works.getWorkId();
-						}						
+						}else{
+							parentNormID = 0;
+						}							
 					}	
 					works = new Works();  
                     if (((PosZP.value == PosMM.value) & (PosZP.value == PosMAT.value) & (PosZP.value == PosDV.value)&
@@ -304,7 +325,7 @@ public class ArpParser {
 					works.setWPercentDone(0);					
 					works.setWCountDone(0);						
 					works.setWTotal(works.getWItogo() * works.getWCount());															
-					works.setWNpp(globalNPP++);						
+					works.setWNpp(++globalNPP);						
 					//works.setWItogo(Float.parseFloat(dataList.get(15).replace(",", ".")));						
 					
 					works.setWZP(PosZP.price);

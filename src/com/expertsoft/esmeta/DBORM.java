@@ -141,7 +141,7 @@ public class DBORM implements Serializable {
 			
 			// We need only Students who are associated with the selected Teacher, so build the query by "Where" clause
 			Where<Works,Integer> where = queryBuilder.where();
-			where.eq(Works.TW_FIELD_PROJECT_ID,  proj.getProjectId())
+			/*where.eq(Works.TW_FIELD_PROJECT_ID,  proj.getProjectId())
 				 .and()			
  				 .eq(Works.TW_FIELD_OS_ID,  os.getOsId())
 				 .and()			
@@ -149,7 +149,17 @@ public class DBORM implements Serializable {
 				 .and()
 				 .ne(Works.TW_FIELD_REC, "machine")
 				 .and()
-				 .ne(Works.TW_FIELD_REC, "resource");
+				 .ne(Works.TW_FIELD_REC, "resource");*/
+			where.and(
+					where.eq(Works.TW_FIELD_PROJECT_ID,  proj.getProjectId()),
+					where.eq(Works.TW_FIELD_OS_ID,  os.getOsId()),
+					where.eq(Works.TW_FIELD_LS_ID,  ls.getLsId()),
+					where.or(							 
+						where.and(
+								where.ne(Works.TW_FIELD_REC, "machine"),
+								where.ne(Works.TW_FIELD_REC, "resource")),							 
+						where.eq(Works.TW_FIELD_PARENT_NORM_ID, 0)));							
+				 
 			
 			// Prepare our SQL statement
 			final PreparedQuery<Works> preparedQuery = queryBuilder.prepare();
