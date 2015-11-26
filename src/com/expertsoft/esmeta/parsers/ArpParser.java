@@ -198,8 +198,7 @@ public class ArpParser {
 					priorID = works.getWorkId();
 					break;
 				case "20"://Norms(Норма)
-					boolean isWorkRes = isNextNormResource(i+1);
-					globalNPP++;
+					boolean isWorkRes = isNextNormResource(i+1);					
 					String strForParse = "";
 					switch(PosZP.operation){
 	              	case 0:             
@@ -305,7 +304,7 @@ public class ArpParser {
 					works.setWPercentDone(0);					
 					works.setWCountDone(0);						
 					works.setWTotal(works.getWItogo() * works.getWCount());															
-					works.setWNpp(globalNPP);						
+					works.setWNpp(globalNPP++);						
 					//works.setWItogo(Float.parseFloat(dataList.get(15).replace(",", ".")));						
 					
 					works.setWZP(PosZP.price);

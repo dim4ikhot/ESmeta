@@ -151,7 +151,7 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 			WexpLA.notifyDataSetChanged();					
 			worksLists.setAdapter(WexpLA);
 				
-			//timerDelayRunForScroll(100);
+			timerDelayRunForScroll(100);
 			
 			freeDialog();	
 		}
@@ -165,9 +165,8 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
                 try {
                 	int currPos = worksLists.getFirstVisiblePosition();
                 	while(firstVisible != currPos){
-                	  //worksLists.smoothScrollToPositionFromTop(currPos, 0);
-                		worksLists.smoothScrollToPosition(currPos, worksLists.getCount() - 1);
-                		TimeUnit.MILLISECONDS.sleep(1000);
+                	  worksLists.smoothScrollToPositionFromTop(currPos, 0);
+            //    		worksLists.smoothScrollToPosition(currPos, worksLists.getCount() - 1);
                 	  currPos++;
                 	} 
                 } catch (Exception e) {}
