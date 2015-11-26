@@ -3,6 +3,7 @@ package com.expertsoft.esmeta.activities;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -54,6 +55,7 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 	List<Works> groupList;
 	ArrayList<List<Works>> childList;
 	List<Works> childListItem;
+	int firstVisible;
 	
 	LoadData loadData;
 	
@@ -97,7 +99,7 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 		public LoadData(Context c, String dialogTitle, String dialogCaption){
 			cntxt = c;
 			title = dialogTitle;
-			caption = dialogCaption;
+			caption = dialogCaption;			
 		}
 		
 		void createDialog(Context context){
@@ -145,14 +147,34 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 		
 		protected void onPostExecute(Void result){
 			super.onPostExecute(result);
-			WexpLA = new WorksExpandableListAdapter(getApplicationContext(), groupList, childList);
-			WexpLA.notifyDataSetChanged();
+			WexpLA = new WorksExpandableListAdapter(getApplicationContext(), groupList, childList);							
+			WexpLA.notifyDataSetChanged();					
 			worksLists.setAdapter(WexpLA);
-			freeDialog();
+				
+			//timerDelayRunForScroll(100);
+			
+			freeDialog();	
 		}
 		
 	}
-		
+	
+	public void timerDelayRunForScroll(long time) {
+        Handler handler = new Handler(); 
+        handler.postDelayed(new Runnable() {           
+            public void run() {   
+                try {
+                	int currPos = worksLists.getFirstVisiblePosition();
+                	while(firstVisible != currPos){
+                	  //worksLists.smoothScrollToPositionFromTop(currPos, 0);
+                		worksLists.smoothScrollToPosition(currPos, worksLists.getCount() - 1);
+                		TimeUnit.MILLISECONDS.sleep(1000);
+                	  currPos++;
+                	} 
+                } catch (Exception e) {}
+            }
+        }, time); 
+    }
+	
 	private void fillChildList(){
 		childList.clear();
 		for(Works w : groupList){
@@ -232,7 +254,7 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 				Dao<Works, Integer> workDao = ormDB.getHelper().getWorksDao();
 				Works work = (Works)data.getSerializableExtra("work");
 				workDao.update(work);	
-				startLoadData("Обновление...", "Применение изменений");
+				startLoadData("Обновление...", "Применение изменений");				
 			}catch(SQLException e){
 				e.printStackTrace();
 			}
@@ -248,6 +270,12 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int childPosition, long id) {
 		// TODO Auto-generated method stub
+		groupPos = groupPosition;
+		childPos = childPosition;
+		
+		firstVisible = parent.getFirstVisiblePosition();
+		firstVisible = parent.getSelectedItemPosition();
+		
 		Works groupWork = (Works)v.getTag();
 		if((groupWork != null)&(! groupWork.getWRec().equals("razdel"))
                 &(! groupWork.getWRec().equals("chast"))
@@ -265,10 +293,16 @@ public class WorksShowActivity extends Activity implements OnGroupClickListener,
 		return true;
 	}
 
+	
 	@Override
 	public boolean onGroupClick(ExpandableListView parent, View v,
 			int groupPosition, long id) {
 		// TODO Auto-generated method stub
+		groupPos = groupPosition;
+		childPos = -1;
+		
+		firstVisible = parent.getFirstVisiblePosition();				
+		
 		globalGroupWork = (Works)v.getTag();
 		if((globalGroupWork != null)&(! globalGroupWork.getWRec().equals("razdel"))
                 &(! globalGroupWork.getWRec().equals("chast"))

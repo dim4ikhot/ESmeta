@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="listItemPositionColor">#b4eaff</color>
-    <color name="listItemPositionColor2">#9fe1fb</color>    
-    <color name="listItemPartPositionColor">#5ed9fd</color>
-    <color name="posChildColor">#d5f3ff</color>
-    <color name="mainActivityColor">#00a9da</color>
-       
-    <color name="executingExists">#7b0a03</color>
-    <color name="executingDone">#034a01</color> 
+    <color name="listItemPositionColor">#B3E5FC</color>
+    <color name="listItemPositionColor2">#81D4FA</color>    
+    <color name="listItemPartPositionColor">#4FC3F7</color>
+    <color name="posChildColor">#E1F5FE</color>
+    <color name="mainActivityColor">#03A9F4</color>
+<!--     colors for text, when executing exit    -->
+    <color name="executingExists">#B71C1C</color>
+    <color name="executingDone">#1B5E20</color> 
 </resources>

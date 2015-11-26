@@ -432,6 +432,8 @@ containing a value of this type.
         public static final int common_signin_btn_text_dark=0x7f09001e;
         public static final int common_signin_btn_text_light=0x7f09001f;
         public static final int executingDone=0x7f09001d;
+        /**      colors for text, when executing exit    
+         */
         public static final int executingExists=0x7f09001c;
         public static final int listItemPartPositionColor=0x7f090019;
         public static final int listItemPositionColor=0x7f090017;
@@ -516,18 +518,19 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f02002a;
     }
     public static final class id {
-        public static final int AppSettings=0x7f080090;
-        public static final int ExitApp=0x7f080092;
+        public static final int AppSettings=0x7f080096;
+        public static final int ExitApp=0x7f080098;
         public static final int Main=0x7f080024;
-        public static final int MainGroup=0x7f08008e;
-        public static final int OpenFormat=0x7f08008f;
+        public static final int MainGroup=0x7f080094;
+        public static final int NPPLayout=0x7f080082;
+        public static final int OpenFormat=0x7f080095;
         public static final int ProjectName=0x7f080033;
         public static final int ProjectTotalNum=0x7f080035;
         public static final int ProjectsList=0x7f080027;
         public static final int TVDate=0x7f080031;
         public static final int TVFolder=0x7f08002f;
         public static final int TVItemCnt=0x7f080030;
-        public static final int about=0x7f080091;
+        public static final int about=0x7f080097;
         public static final int adView=0x7f080025;
         public static final int adjust_height=0x7f080001;
         public static final int adjust_width=0x7f080002;
@@ -544,8 +547,9 @@ containing a value of this type.
         public static final int buy_with=0x7f080014;
         public static final int buy_with_google=0x7f080015;
         public static final int cast_notification_id=0x7f080000;
+        public static final int cipherLayout=0x7f080086;
         public static final int classic=0x7f080019;
-        public static final int dataLayout=0x7f080082;
+        public static final int dataLayout=0x7f080084;
         public static final int donate_with=0x7f080016;
         public static final int donate_with_google=0x7f080017;
         public static final int editExecutingCount=0x7f08004e;
@@ -578,14 +582,16 @@ containing a value of this type.
         public static final int imgLayout=0x7f080080;
         public static final int lViewbuild=0x7f08002b;
         public static final int layoutApply=0x7f08004f;
-        public static final int layoutCount=0x7f080088;
-        public static final int layoutMainDescript=0x7f080084;
-        public static final int layoutMeas=0x7f080085;
-        public static final int layoutTotal=0x7f08008b;
+        public static final int layoutCount=0x7f08008e;
+        public static final int layoutMainDescript=0x7f08008a;
+        public static final int layoutMeas=0x7f08008b;
+        public static final int layoutTotal=0x7f080091;
         public static final int logo_only=0x7f080018;
+        public static final int mainInfoLayout=0x7f080085;
         public static final int mainlayout=0x7f080032;
         public static final int match_parent=0x7f080010;
         public static final int monochrome=0x7f08001e;
+        public static final int nameLayout=0x7f080088;
         public static final int none=0x7f080003;
         public static final int normal=0x7f080005;
         public static final int oEstimateList=0x7f08002a;
@@ -637,7 +643,7 @@ containing a value of this type.
         public static final int textView4=0x7f080023;
         public static final int totalProjtxt=0x7f080034;
         public static final int totalostxt=0x7f080038;
-        public static final int totalworkstxt=0x7f08008c;
+        public static final int totalworkstxt=0x7f080092;
         public static final int tvProjCipher=0x7f08003d;
         public static final int tvProjCipherValue=0x7f08003e;
         public static final int tvProjContractor=0x7f080041;
@@ -648,13 +654,15 @@ containing a value of this type.
         public static final int tvProjNameValue=0x7f08003c;
         public static final int tvProjTotal=0x7f080043;
         public static final int tvProjTotalValue=0x7f080044;
-        public static final int workName=0x7f080083;
-        public static final int workTotalNum=0x7f08008d;
+        public static final int workCipher=0x7f080087;
+        public static final int workNPP=0x7f080083;
+        public static final int workName=0x7f080089;
+        public static final int workTotalNum=0x7f080093;
         public static final int worklayout=0x7f08007f;
-        public static final int worksCount=0x7f080089;
-        public static final int worksCountValue=0x7f08008a;
-        public static final int worksMeasured=0x7f080086;
-        public static final int worksMeasuredValue=0x7f080087;
+        public static final int worksCount=0x7f08008f;
+        public static final int worksCountValue=0x7f080090;
+        public static final int worksMeasured=0x7f08008c;
+        public static final int worksMeasuredValue=0x7f08008d;
         public static final int wrCosts=0x7f08007b;
         public static final int wrCostsNum=0x7f08007c;
         public static final int wrCounts=0x7f080079;

@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expertsoft.esmeta.DateFragment;
 import com.expertsoft.esmeta.DateFragment.GetDateListener;
@@ -42,7 +43,7 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 	Button btnOk;
 	ImageView btnSetDate, btnApplyFacts;
 	LinearLayout layoutApply;
-	Intent intent;
+	Intent intent;	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
 	boolean wasChangedPercent, wasChangedCount;
 	
@@ -74,7 +75,7 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
-		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		super.onCreate(savedInstanceState);		
 	}
 	
@@ -136,13 +137,14 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			// TODO Auto-generated method stub
+			/*
 			try{
 				if(s.length() > 0){
 					wasChangedPercent = true;					
 				}
 			}catch(Exception e){
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 		@Override
@@ -156,23 +158,43 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 		public void afterTextChanged(Editable s) {
 			// TODO Auto-generated method stub
 			layoutApply.setVisibility(View.VISIBLE);			
+			wasChangedPercent = true;
+			wasChangedCount = false;
 		}
 	};
 	
 	private void recalcCount(String s){
-		float totalcount = currWork.getWCount();
-		String percent = s.toString();
-		float percentf = Float.parseFloat(percent);
-		DecimalFormat df = new DecimalFormat("0.####");
-		countDone.setText(df.format((totalcount * percentf) / 100));
+		try{
+			float totalcount = currWork.getWCount();
+			String percent = s.toString();
+			float percentf = Float.parseFloat(percent);			
+			DecimalFormat df = new DecimalFormat("0.####");
+			if(percentf <= 100){
+				countDone.setText(df.format((totalcount * percentf) / 100).replace(",", "."));
+			}else{
+				countDone.setText(df.format((totalcount * 100) / 100).replace(",", "."));
+				percentDone.setText("100");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	private void recalcPercent(String s){
-		float totalcount = currWork.getWCount();
-		String eCount = s.toString();
-		float countf = Float.parseFloat(eCount);
-		DecimalFormat df = new DecimalFormat("0.##");
-		percentDone.setText(df.format((100 * countf) / totalcount));
+		try{
+			float totalcount = currWork.getWCount();
+			String eCount = s.toString();
+			float countf = Float.parseFloat(eCount);
+			DecimalFormat df = new DecimalFormat("0.##");
+			if (countf <= totalcount){			
+				percentDone.setText(df.format((100 * countf) / totalcount).replace(",", "."));
+			}else{
+				percentDone.setText(df.format((100 * totalcount) / totalcount).replace(",", "."));
+				countDone.setText(df.format(totalcount).replace(",", "."));
+			}			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	TextWatcher editCountChangeListener = new TextWatcher() {
@@ -180,13 +202,14 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			// TODO Auto-generated method stub
+			/*
 			try{
 				if(s.length() > 0){
 					wasChangedCount = true;					
 				}
 			}catch(Exception e){
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 		@Override
@@ -199,7 +222,9 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 		@Override
 		public void afterTextChanged(Editable s) {
 			// TODO Auto-generated method stub
-			layoutApply.setVisibility(View.VISIBLE);			
+			layoutApply.setVisibility(View.VISIBLE);	
+			wasChangedCount = true;	
+			wasChangedPercent = false;
 		}
 	};
 	
@@ -242,21 +267,32 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 					break;
 				case R.id.btnApplyExecuting:
 					try{
-						if(wasChangedPercent){
-							recalcCount(percentDone.getText().toString());
-							wasChangedPercent = false;
+						String percent = percentDone.getText().toString();
+						String count = countDone.getText().toString();
+						if((!percent.equals(""))&(!count.equals(""))){
+							if(wasChangedPercent){
+								recalcCount(percentDone.getText().toString());
+								wasChangedPercent = false;
+							}else{
+								recalcPercent(countDone.getText().toString());
+								wasChangedCount = false;
+							}
+							currWork.setWStartDate(sdf.parse(startDate.getText().toString()));
+							currWork.setWPercentDone(Float.parseFloat(percentDone.getText().toString()));
+							currWork.setWCountDone(Float.parseFloat(countDone.getText().toString()));
+							intent = new Intent();
+							intent.putExtra("work", currWork);
+							getActivity().setResult(Activity.RESULT_OK, intent);
+							layoutApply.setVisibility(View.GONE);
 						}else{
-							recalcPercent(countDone.getText().toString());
+							Toast.makeText(getContext(), "Одно из полей заполнено некорректно!", Toast.LENGTH_LONG).show();
+							wasChangedPercent = false;
 							wasChangedCount = false;
 						}
-						currWork.setWStartDate(sdf.parse(startDate.getText().toString()));
-						currWork.setWPercentDone(Float.parseFloat(percentDone.getText().toString()));
-						currWork.setWCountDone(Float.parseFloat(countDone.getText().toString()));
-						intent = new Intent();
-						intent.putExtra("work", currWork);
-						getActivity().setResult(Activity.RESULT_OK, intent);
-						layoutApply.setVisibility(View.GONE);
 					}catch(ParseException e){
+						e.printStackTrace();
+					}catch(NumberFormatException e){
+						Toast.makeText(getContext(), "Неверный формат числа", Toast.LENGTH_LONG).show();
 						e.printStackTrace();
 					}					
 					break;
@@ -267,18 +303,19 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 	
 	private void fillTheWorksDetail(){
 		if (currWork != null){
+			DecimalFormat decf = new DecimalFormat("0.####");
 			cipherValue.setText(currWork.getWCipher());
 			nameValue.setText(currWork.getWName());
 			measuredValue.setText(currWork.getWMeasured());
-			countValue.setText(String.valueOf(currWork.getWCount()));
+			countValue.setText(decf.format(currWork.getWCount()).replace(",", "."));
 			costOfOneTotal.setText(String.valueOf(currWork.getWItogo()));
 			salaryOfOne.setText(String.valueOf(currWork.getWZP()));
 			costOfOneMachine.setText(String.valueOf(currWork.getWMach()));
 			salaryOfOneMachine.setText(String.valueOf(currWork.getWZPMach()));
 			totalCostCommon.setText(String.valueOf(currWork.getWTotal()));
-			totalSalary.setText(String.valueOf(currWork.getWZPTotal()));
-			totalCostMachine.setText(String.valueOf(currWork.getWMachTotal()));
-			totalSalaryMachine.setText(String.valueOf(currWork.getWZPMachTotal()));
+			totalSalary.setText(decf.format(currWork.getWZPTotal()).replace(",", "."));
+			totalCostMachine.setText(decf.format(currWork.getWMachTotal()).replace(",", "."));
+			totalSalaryMachine.setText(decf.format(currWork.getWZPMachTotal()).replace(",", "."));
 			
 			laborCostOfOneWorker.setText(String.valueOf(currWork.getWTz()));
 			laborTotalCostWorker.setText(String.valueOf(currWork.getWTZTotal()));
@@ -286,8 +323,8 @@ public class WorkDetailShowerActivity extends Fragment/*Activity*/implements Get
 			laborCostOfOneMachine.setText(String.valueOf(currWork.getWTZMach()));			
 			laborTotalCostMachine.setText(String.valueOf(currWork.getWTZMachTotal()));			
 			startDate.setText(sdf.format(currWork.getWStartDate()));
-			percentDone.setText(String.valueOf(currWork.getWPercentDone()));
-			countDone.setText(String.valueOf(currWork.getWCountDone()));
+			percentDone.setText(String.valueOf(currWork.getWPercentDone()));			
+			countDone.setText(decf.format(currWork.getWCountDone()).replace(",", "."));
 		}
 	}
 	

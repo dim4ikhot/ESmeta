@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expertsoft.esmeta.R;
 import com.expertsoft.esmeta.data.Works;
@@ -27,7 +28,7 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 	List<Works> groupWorks;
 	ArrayList<List<Works>> childWorks;
 	LayoutInflater lInflater;
-	int globalIterator = 0;
+	int globalIterator = 1;
 	
 	public WorksExpandableListAdapter(){}
 	
@@ -89,16 +90,26 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 		if (myview == null){
 			myview = lInflater.inflate(R.layout.works_shower_item, parent, false);
 		}
-		LinearLayout ll = (LinearLayout)myview.findViewById(R.id.worklayout);		
+		LinearLayout ll = (LinearLayout)myview.findViewById(R.id.worklayout);	
+		LinearLayout llNPP = (LinearLayout)myview.findViewById(R.id.NPPLayout);	
+		LinearLayout llCipher = (LinearLayout)myview.findViewById(R.id.cipherLayout);	
 		TextView osname = (TextView)myview.findViewById(R.id.workName);
 		TextView osTotal = (TextView)myview.findViewById(R.id.workTotalNum);
 		TextView osMeasure = (TextView)myview.findViewById(R.id.worksMeasuredValue);
 		TextView osCount = (TextView)myview.findViewById(R.id.worksCountValue);
+		TextView osNPP = null;;
+		try{
+		  osNPP = (TextView)myview.findViewById(R.id.workNPP);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		TextView osCipher = (TextView)myview.findViewById(R.id.workCipher);
 		ImageView imngView = (ImageView)myview.findViewById(R.id.imgExpColl);	
 		LinearLayout llMeas = (LinearLayout)myview.findViewById(R.id.layoutMeas); 
 		LinearLayout llCount = (LinearLayout)myview.findViewById(R.id.layoutCount);
 		LinearLayout llTotal = (LinearLayout)myview.findViewById(R.id.layoutTotal);
 		((ExpandableListView)parent).expandGroup(groupPosition, false);
+		
 		imngView.setVisibility(View.GONE);
 		/*
 		if(childWorks.get(groupPosition).size() == 0){
@@ -121,7 +132,7 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 			osname.setText(work.getWName());
 		}else{
 			osname.setText(work.getWName().substring(0, 49) + "...");
-		}
+		}				
 		
 		if((work.getWRec().contains("razdel"))|(work.getWRec().contains("chast"))){
 			osname.setTextAppearance(context, R.style.boldText);
@@ -129,11 +140,15 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 			ll.setBackgroundColor(bcolor);
 			llMeas.setVisibility(View.GONE);
 			llCount.setVisibility(View.GONE);
-			
+			llNPP.setVisibility(View.GONE);
+			llCipher.setVisibility(View.GONE);
+			((TextView)myview.findViewById(R.id.worksCount)).setText(context.getResources().getString(R.string.wrCounts));			
 		}else 
 		if(work.getWRec().contains("koef")){
 			llMeas.setVisibility(View.GONE);
 			llTotal.setVisibility(View.GONE);
+			llNPP.setVisibility(View.GONE);
+			llCipher.setVisibility(View.GONE);
 			bcolor = context.getResources().getColor(R.color.listItemPartPositionColor);
 			ll.setBackgroundColor(bcolor);
 			((TextView)myview.findViewById(R.id.worksCount)).setText(context.getResources().getString(R.string.koefIs));
@@ -142,12 +157,26 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 			llMeas.setVisibility(View.VISIBLE);
 			llTotal.setVisibility(View.VISIBLE);
 			llCount.setVisibility(View.VISIBLE);
+			llNPP.setVisibility(View.VISIBLE);
+			llCipher.setVisibility(View.VISIBLE);
 			osname.setTextAppearance(context, R.style.normalText);
+			((TextView)myview.findViewById(R.id.worksCount)).setText(context.getResources().getString(R.string.wrCounts));
 			if(groupPosition % 2 == 0){
 				bcolor = context.getResources().getColor(R.color.listItemPositionColor);
 			}else{
 				bcolor = context.getResources().getColor(R.color.listItemPositionColor2);
-			}				
+			}
+			
+			if (work.getWCipher() != null){
+				osCipher.setText(work.getWCipher());
+			}
+			
+			if(work.getWNpp() != 0){
+				 osNPP.setText(String.valueOf(work.getWNpp()));
+			}
+			/*else{
+				osNPP.setText(String.valueOf(groupPosition+1));
+			}*/
 			
 			ll.setBackgroundColor(bcolor);
 		}
@@ -177,7 +206,8 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 		}catch(Exception e){
 			e.printStackTrace();
 		}		
-		globalIterator++;				
+		globalIterator++;	
+		//Toast.makeText(context, "Curr item = "+groupPosition, Toast.LENGTH_LONG).show();
 		myview.setTag(work);
 		return myview;		
 	}
@@ -196,6 +226,8 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 		TextView osTotal = (TextView)childView.findViewById(R.id.workTotalNum);
 		TextView osMeasure = (TextView)childView.findViewById(R.id.worksMeasuredValue);
 		TextView osCount = (TextView)childView.findViewById(R.id.worksCountValue);
+		TextView osNPP = (TextView)childView.findViewById(R.id.workNPP);
+		TextView osCipher = (TextView)childView.findViewById(R.id.workCipher);
 		ImageView imngView = (ImageView)childView.findViewById(R.id.imgExpColl);
 		
 		imngView.setVisibility(View.VISIBLE);
@@ -206,6 +238,18 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 		}else{
 			osname.setText(work.getWName().substring(0, 49) + "...");
 		}
+		
+		if (work.getWCipher() != null){
+			osCipher.setText(work.getWCipher());
+		}
+		
+		if(work.getWNpp() != 0){
+			 osNPP.setText(String.valueOf(work.getWNpp()));
+		}
+		/*else{
+			osNPP.setText(String.valueOf(groupPosition+1 + (childPosition + 1)));
+		}*/
+		
 		float percentDone = work.getWPercentDone();
 		if((percentDone>0)&(percentDone < 100)){
 			bcolor = context.getResources().getColor(R.color.executingExists);
@@ -234,7 +278,7 @@ public class WorksExpandableListAdapter extends BaseExpandableListAdapter {
 		bcolor = context.getResources().getColor(R.color.posChildColor);
 		ll.setBackgroundColor(bcolor);
 		childView.setTag(work);
-		
+		globalIterator++;	
 		return childView;
 	}
 

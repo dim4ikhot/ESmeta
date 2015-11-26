@@ -168,6 +168,46 @@ public class DBORM implements Serializable {
 		return worksList;
 	}
 	
+	public Works getDataForCurrentWorks(Projects proj, OS os, LS ls, Works w){
+		Works worksList = new Works();
+		try {
+			// This is how, a reference of DAO object can be done
+			Dao<Works,Integer> worksGroupDao =  getHelper().getWorksDao();
+			
+			// Get our query builder from the DAO
+			final QueryBuilder<Works, Integer> queryBuilder = worksGroupDao.queryBuilder();
+			
+			// We need only Students who are associated with the selected Teacher, so build the query by "Where" clause
+			Where<Works,Integer> where = queryBuilder.where();
+			where.eq(Works.TW_FIELD_PROJECT_ID,  proj.getProjectId())
+				 .and()			
+ 				 .eq(Works.TW_FIELD_OS_ID,  os.getOsId())
+				 .and()			
+				 .eq(Works.TW_FIELD_LS_ID,  ls.getLsId())
+				 .and()			
+				 .eq(Works.TW_FIELD_ID,  w.getWorkId())
+				 .and()
+				 .ne(Works.TW_FIELD_REC, "machine")
+				 .and()
+				 .ne(Works.TW_FIELD_REC, "resource");
+			
+			// Prepare our SQL statement
+			final PreparedQuery<Works> preparedQuery = queryBuilder.prepare();
+			
+			// Fetch the list from Database by queryingit 
+			final Iterator<Works>  studentsIt = worksGroupDao.query(preparedQuery).iterator();
+			
+			// Iterate through the StudentDetails object iterator and populate the comma separated String
+			while (studentsIt.hasNext()) {
+				final Works oss = studentsIt.next();
+				worksList = oss;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return worksList;
+	}
+	
 	public List<Works> getWorksChild(Projects proj, OS os, LS ls, Works work){
 		List<Works> worksList = new ArrayList<Works>();
 		try {

@@ -15,28 +15,92 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="match_parent"
 	        android:gravity="center_vertical"
+	        android:visibility="gone"
 	        android:orientation="vertical" >
 	        <ImageView
 		       android:id="@+id/imgExpColl"
 		       android:layout_width="wrap_content"
 		       android:layout_height="wrap_content"
 		       android:src="@drawable/expand" />
-	    </LinearLayout>
+	    </LinearLayout>	            
+        
+        <LinearLayout
+		    android:id="@+id/NPPLayout"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent"
+		    android:gravity="center_vertical"
+		    android:layout_marginRight="2dp"
+		    android:layout_weight="1"
+		    android:background="@color/mainActivityColor"		        
+		    android:orientation="vertical" >
+		        
+	         <TextView
+		        android:id="@+id/workNPP"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:ellipsize="none"
+		        android:singleLine="false"
+		        android:layout_gravity="center"
+		        android:textColor="@android:color/black"
+		        android:text=""	            
+		        android:textSize="18sp" />
+	            
+		</LinearLayout> 
+         
         <LinearLayout
 	        android:id="@+id/dataLayout"
-	        android:layout_width="match_parent"
+	        android:layout_width="0dp"
 	        android:layout_height="match_parent"
+	        android:layout_weight="9"
 	        android:orientation="vertical" >
-	        <TextView
-	            android:id="@+id/workName"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:ellipsize="none"
-			    android:singleLine="false"
-	            android:layout_gravity="left"
-	            android:textColor="@android:color/black"
-	            android:text="@string/NoLoadedProj"	            
-	            android:textSize="18sp" />
+	        
+            <LinearLayout
+		        android:id="@+id/mainInfoLayout"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		        android:orientation="vertical" >	                           
+		        
+		        <LinearLayout
+			        android:id="@+id/cipherLayout"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:gravity="center_vertical"
+			        android:layout_marginRight="2dp"			        
+			        android:orientation="vertical" >
+			        
+		             <TextView
+			            android:id="@+id/workCipher"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:ellipsize="none"
+					    android:singleLine="false"
+			            android:layout_gravity="left"
+			            android:textColor="@android:color/black"
+			            android:text=""	            
+			            android:textSize="18sp" />
+		            
+			    </LinearLayout> 
+                
+		        <LinearLayout
+			        android:id="@+id/nameLayout"
+			        android:layout_width="match_parent"
+			        android:layout_height="match_parent"
+			        android:gravity="center_vertical"			               
+			        android:orientation="vertical" >
+		        
+			        <TextView
+			            android:id="@+id/workName"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:ellipsize="none"
+					    android:singleLine="false"
+			            android:layout_gravity="left"
+			            android:textColor="@android:color/black"
+			            android:text="@string/NoLoadedProj"	            
+			            android:textSize="18sp" />
+		        </LinearLayout>
+		    </LinearLayout>    
 	
 	        <LinearLayout
 	            android:id="@+id/layoutMainDescript"

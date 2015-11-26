@@ -93,7 +93,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.FragmentTabs">
+        <activity 
+            android:name=".activities.FragmentTabs"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="com.expertsoft.esmeta.showtabs"/>
                 <category android:name="android.intent.category.DEFAULT"/>

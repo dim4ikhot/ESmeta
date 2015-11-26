@@ -46,6 +46,7 @@ public class ArpParser {
 	int counter = 0;
 	String projectName;
 	int parentNormID = 0;
+	int globalNPP = 0;
 	
 	KoefValue PosZP = new KoefValue();
 	KoefValue PosMM  = new KoefValue();
@@ -198,6 +199,7 @@ public class ArpParser {
 					break;
 				case "20"://Norms(Норма)
 					boolean isWorkRes = isNextNormResource(i+1);
+					globalNPP++;
 					String strForParse = "";
 					switch(PosZP.operation){
 	              	case 0:             
@@ -303,7 +305,7 @@ public class ArpParser {
 					works.setWPercentDone(0);					
 					works.setWCountDone(0);						
 					works.setWTotal(works.getWItogo() * works.getWCount());															
-					works.setWNpp( 0);						
+					works.setWNpp(globalNPP);						
 					//works.setWItogo(Float.parseFloat(dataList.get(15).replace(",", ".")));						
 					
 					works.setWZP(PosZP.price);
