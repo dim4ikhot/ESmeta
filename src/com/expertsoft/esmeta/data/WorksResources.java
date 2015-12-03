@@ -11,6 +11,7 @@ public class WorksResources {
 	public static final String TWS_FIELD_MEASURED = "workres_measured";
 	public static final String TWS_FIELD_COUNT = "workres_count";
 	public static final String TWS_FIELD_COST = "workres_cost";
+	public static final String TWS_FIELD_ONOFF = "workres_onoff";
 	public static final String TWS_FIELD_TOTALCOST = "workres_totalcost";
 	public static final String TWS_FIELD_PART = "workres_part";
 	
@@ -37,6 +38,9 @@ public class WorksResources {
 	
 	@DatabaseField(columnName = TWS_FIELD_TOTALCOST)
 	private float wrTotalCost;
+	
+	@DatabaseField(columnName = TWS_FIELD_ONOFF)
+	private int wrOnOff;
 	
 	@DatabaseField(columnName = TWS_FIELD_PART)
 	private int wrPart;
@@ -105,6 +109,16 @@ public class WorksResources {
 	public float getWrTotalCost(){
 		return wrTotalCost;
 	}
+	
+	//... onOff
+	public void setWrOnOff(int onOff){
+		wrOnOff = onOff;
+	}
+	
+	public int getWrOnOff(){
+		return wrOnOff;
+	}
+	
 	//... Part
 	public void setWrPart(int part){
 		wrPart = part;

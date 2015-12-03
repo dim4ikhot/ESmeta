@@ -1,18 +1,17 @@
 package com.expertsoft.esmeta.file_work;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 
 import android.util.Log;
 
@@ -69,6 +68,45 @@ public class UnZipBuild {
 	    }
 	    return ReturnedFile;
 	}
+	
+	//zipping All in Cp1251 
+		public File exZip(File fileXML) throws IOException {		   
+		    File ReturnedFile = null;		    		    
+		    ZipArchiveOutputStream zas = null;
+		    FileInputStream fis = null;
+		    File file = null;
+		    try {
+		        byte[] buffer = new byte[8192];
+		        file = new File(_zipFile);
+		        zas = new ZipArchiveOutputStream(file); // this supports non-USACII names
+		        ZipArchiveEntry entry = new ZipArchiveEntry(fileXML.getName());        		        
+		        zas.putArchiveEntry(entry);
+		        fis = new FileInputStream(fileXML);		       
+                // копируем потоки
+		        int length = -1;
+                while ((length = fis.read(buffer))!= -1) {
+                    zas.write(buffer, 0, length);
+                }                      		        	        		       
+		    } finally {
+		    	try { 
+		    		if (fis!=null) {
+		    			fis.close();
+		    			} 
+		    	}catch (Exception e) { }		    		
+		    	try { 
+		    		zas.closeArchiveEntry(); 
+		    	} catch (Exception e) { }
+		        try { 
+		        	zas.close(); 
+		       	} catch (Exception e) { }		        		        
+		        ReturnedFile = file;
+		        fileXML.delete();
+		        if(ReturnedFile.isFile())
+		        	return ReturnedFile;
+		    }
+		    return ReturnedFile;
+		}
+	
 	//Unzipping only in UTF-8
 	public File unzip() {
 		String unzippedFile = "";

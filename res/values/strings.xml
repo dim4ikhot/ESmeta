@@ -8,11 +8,13 @@
     <string name="ProjTotal">Всего по стройке:</string>
     <string name="ZML">/Android/data/com.expertsoft.esmeta/ZML</string>
     <string name="ARP">/Android/data/com.expertsoft.esmeta/ARP</string>
+    <string name="SAVES">/Android/data/com.expertsoft.esmeta/Saves</string>
     <string name="OsLsTotal">Всего по смете:</string>
     <string name="ExitApp">Выход</string>
     <string name="aboutProgram">О программе</string>
     <string name="worksTotal">Всего:</string>
     <string name="wrCounts">Кол-во:</string>
+    <string name="wrShortCounts">Кол:</string>
     <string name="koefIs">Значение:</string>
     <string name="wrCosts">Стоим.:</string>
     <string name="view_pos_txt">OK</string>

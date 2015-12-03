@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
     
     <LinearLayout
         android:id="@+id/wrlayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
-                android:text="@string/wrCounts" />
+                android:text="@string/wrShortCounts" />
 
             <TextView
                 android:id="@+id/wrCountsNum"
@@ -70,5 +71,20 @@
                 android:text="5555.55" />
         </LinearLayout>
     </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/wrLayoutOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"        
+        android:orientation="vertical" >        
+        
+        <ToggleButton
+            android:id="@+id/tgbtnOnOff"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:enabled="false" />
+        
+    </LinearLayout>    
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.text.ParseException;
 //import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -111,9 +112,16 @@ public class ZmlParser {
 										projects.setProjectCipher(attrValue);
 										break;
 									case "STROIKACREATIONDATE":	
-										attrValue = attrValue.replace("/", ".");
+										attrValue = attrValue.replace("/", ".");									
 										SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-										Date date = sdf.parse(attrValue);										
+										Date date = null;
+										try{
+											date = sdf.parse(attrValue);
+										}catch(ParseException e){
+											e.printStackTrace();
+											sdf = new SimpleDateFormat("dd.MM.yyyy");
+											date = sdf.parse(attrValue);
+										}
 										projects.setProjectCreatedDate(date);
 										break;
 									case "STROIKAZAKAZCHIK":
@@ -123,9 +131,18 @@ public class ZmlParser {
 										projects.setProjectContractor(attrValue);
 										break;
 									case "STROIKATOTAL":
-										projects.setProjectTotal(Float.parseFloat(attrValue));
+										projects.setProjectTotal(Float.parseFloat(attrValue.replace(",", ".")));
 										break;
 									}																																																					
+								}
+								if (projects.getProjectCipher() == null){
+									projects.setProjectCipher("");
+								}
+								if(projects.getProjectCustomer() == null){
+									projects.setProjectCustomer("");
+								}
+								if(projects.getProjectContractor() == null){
+									projects.setProjectContractor("");
 								}
 								addProjects(projects);
 								break;
@@ -143,10 +160,13 @@ public class ZmlParser {
 										os.setOsCipher(attrValue);
 										break;									
 									case "OSTOTAL":
-										os.setOsTotal(Float.parseFloat(attrValue));
+										os.setOsTotal(Float.parseFloat(attrValue.replace(",", ".")));
 										break;
 									}									
-								}								
+								}	
+								if(os.getOsCipher() == null){
+									os.setOsCipher("");
+								}
 								os.setOsProjects(projects);	
 								os.setOsProjectId(projects.getProjectId());
 								addOS(os);
@@ -165,9 +185,12 @@ public class ZmlParser {
 										ls.setLsCipher(attrValue);
 										break;									
 									case "LSTOTAL":
-										ls.setLsTotal(Float.parseFloat(attrValue));
+										ls.setLsTotal(Float.parseFloat(attrValue.replace(",", ".")));
 										break;
 									}
+								}
+								if(ls.getLsCipher() == null){
+									ls.setLsCipher("");
 								}
 								ls.setLsHidden(false);
 								ls.setLsProjectId(projects.getProjectId());
@@ -281,6 +304,15 @@ public class ZmlParser {
 										break;										
 									}
 								}
+								if (works.getWCipher() == null){
+									works.setWCipher("");
+								}
+								if (works.getWCipherObosn() == null){
+									works.setWCipherObosn("");
+								}
+								if(works.getWMeasured() == null){
+									works.setWMeasured("");
+								}
 								works.setWProjectId(projects.getProjectId());
 								works.setWOsId(os.getOsId());
 								works.setWLsId(ls.getLsId());
@@ -290,7 +322,7 @@ public class ZmlParser {
 								works.setWStartDate(new Date());								
 								works.setWOSFK(os);
 								String cipher = works.getWCipher();								
-								if((rec.equals(""))|(rec.equals("koef"))|((cipher == null)&(rec.contains("record")))){
+								if((rec.equals(""))|(rec.equals("koef"))|((cipher.equals(""))&(rec.contains("record")))){
 									works.setWRec("koef");
 								}else{
 									if((rec.contains("razdel"))|(rec.contains("chast"))){
@@ -346,12 +378,18 @@ public class ZmlParser {
 										worksres.setWrTotalCost(worksres.getWrCount() * worksres.getWrCost());
 										break;
 									case "RSONOFF":
-										
+										worksres.setWrOnOff(Integer.parseInt(attrValue));
 										break;
 									case "RSRAZDEL":
 										worksres.setWrPart(Integer.parseInt(attrValue));
 										break;
 									}
+								}
+								if (worksres.getWrCipher() == null){
+									worksres.setWrCipher("");
+								}
+								if(worksres.getWrMeasured()==null){
+									worksres.setWrMeasured("");
 								}
 								worksres.setWrWorkId(works.getWorkId());
 								worksres.setWrWork(works);

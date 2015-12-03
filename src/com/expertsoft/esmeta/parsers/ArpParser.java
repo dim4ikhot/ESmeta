@@ -399,6 +399,7 @@ public class ArpParser {
 					}else{
 						worksres.setWrPart(2);
 					}
+					worksres.setWrOnOff(-1);
 					worksres.setWrWork(works);
 					worksres.setWrWorkId(works.getWorkId());
 					addWorksRes(worksres);

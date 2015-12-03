@@ -127,6 +127,7 @@ public class FileUtils {
 		}		
 		return new File(globalFileName);
 	}
+	
 	public File encoddeAnyToUTF8(String filepath, String Charset, String ext){
 		File f = new File(filepath);		
 		String globalFileName = f.getParent() + "/tempFile1"+ext;
@@ -156,6 +157,38 @@ public class FileUtils {
 					new FileOutputStream(f.getParent() + "/tempFile"+ext), "UTF-8");										                
 			writer.write(readbuff.toString());
 			writer.close();	*/					
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}		
+		return new File(globalFileName);
+	}
+	
+	public File encoddeUTF8ToWin1251(String filepath,String fileName, String Charset, String ext){
+		File f = new File(filepath);		
+		String globalFileName = f.getParent() + "/"+ fileName + ext;
+		try{
+			
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(
+							new FileInputStream(filepath), Charset));
+			String ch;	
+			FileOutputStream mainStream = new FileOutputStream(globalFileName);
+			BufferedOutputStream readbuff = new BufferedOutputStream(mainStream);
+			while((ch = br.readLine())!= null)
+			{																
+				byte[]b = ch.getBytes("windows-1251");
+				readbuff.write(b);
+				byte[]b1 = {13,10};
+				readbuff.write(b1);
+			}
+			readbuff.close();
+			mainStream.close();
+			br.close();			
+			if(! ext.contains("txt")){
+				f.delete();			
+			}
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();

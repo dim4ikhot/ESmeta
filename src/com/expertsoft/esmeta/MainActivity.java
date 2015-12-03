@@ -30,21 +30,29 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.expertsoft.esmeta.OpenFileType.GetPathDialogListener;
+import com.expertsoft.esmeta.activities.DialogEnterName;
+import com.expertsoft.esmeta.activities.DialogEnterName.OnGetNameListener;
 import com.expertsoft.esmeta.activities.ObjectsEstimateShowActivity;
 import com.expertsoft.esmeta.activities.ProgramInfo;
 import com.expertsoft.esmeta.activities.ProjectDetailShowActivity;
 import com.expertsoft.esmeta.adapters.ProjectLoaderAdapter;
 import com.expertsoft.esmeta.data.Projects;
+import com.expertsoft.esmeta.dialogs.DialogDeleteProject;
+import com.expertsoft.esmeta.dialogs.DialogFileExists;
 import com.expertsoft.esmeta.file_work.ParalelOpenBuild;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.expertsoft.esmeta.file_work.SaveBuild;
 import com.j256.ormlite.dao.Dao;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends FragmentActivity implements GetPathDialogListener{
+public class MainActivity extends FragmentActivity implements GetPathDialogListener,OnGetNameListener{
 
 	//Items menu ID
 	static final int DELETE_ID = 0;
 	static final int VIEW_DETAIL_ID = 1;
+	static final int SAVE_PROJECT = 2;
 	
 	//request codes for Activity
 	static final int SETTINGS_RESULT = 1;
@@ -58,6 +66,7 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 	//Paths to builders
 	public String ZML_PATH;
 	public String ARP_PATH;
+	private String SAVE_PATH;
 	public static String ZMLPath = "";
 	public static String ARPPath = "";		
 	
@@ -79,8 +88,13 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 	ProjectLoaderAdapter PLA;
 	//AsyncTask open build
 	ParalelOpenBuild StartLoadBuild;
+	SaveBuild saveBuild;
+	Projects globalSaveProj;
 	
 	ProgramInfo aboutProg;
+	DialogEnterName enterName;
+	DialogFileExists fileExtsts;
+	DialogDeleteProject delProj;
 		
 	Button btnAddBuild;
 	@Override
@@ -94,12 +108,13 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 		btnAddBuild = (Button)findViewById(R.id.btnAddNewBuild);
 		btnAddBuild.setOnClickListener(openBuild);
 		//Load ad
-		AdView mAdView = (AdView) findViewById(R.id.adView);
+		/*AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
 		//default paths
 		ZML_PATH = Environment.getExternalStorageDirectory().toString()+ getString(R.string.ZML);
 		ARP_PATH = Environment.getExternalStorageDirectory().toString()+ getString(R.string.ARP);
+		SAVE_PATH = Environment.getExternalStorageDirectory().toString()+getString(R.string.SAVES);
 		//Create new dialog
 		OpenFormatDialog = new OpenFileType();				
         //Create new data base
@@ -210,7 +225,9 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 		if(! new File(ZML_PATH).isDirectory())
 		  new File(ZML_PATH).mkdirs();
 		if(! new File(ARP_PATH).isDirectory())
-     		new File(ARP_PATH).mkdirs();
+     		new File(ARP_PATH).mkdirs();		
+		if(! new File(SAVE_PATH).isDirectory())
+     		new File(SAVE_PATH).mkdirs();
 	}
 	
 	protected void onResume(){
@@ -239,7 +256,7 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 			ARPPath = Environment.getExternalStorageDirectory().toString()+Settings.getString(ARP_PATH_SP, "");
 		}else{
 			ARPPath = Environment.getExternalStorageDirectory().toString()+getResources().getString(R.string.ARP);
-		}
+		}		
 	}
 	protected void onDestroy(){
 		super.onDestroy();
@@ -280,8 +297,9 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		// Inflate the menu; this adds items to the action bar if it is present.
-		menu.add(0, DELETE_ID, 1, "Удалить стройку");	
-		menu.add(0, VIEW_DETAIL_ID, 0, "Детали стройки");	
+		menu.add(0, DELETE_ID, 2, "Удалить стройку");	
+		menu.add(0, VIEW_DETAIL_ID, 0, "Детали стройки");
+		menu.add(0, SAVE_PROJECT, 1, "Сохранить стройку");		
 	}
 
 	@Override
@@ -294,6 +312,7 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 		case DELETE_ID:					
 			// получаем инфу о пункте списка		    
 		    proj = allProjectsList.get(acmi.position);			   
+		    /*
 		    try{
 		    	//Getting Dao object
 		    	Dao<Projects,Integer> projectDao = ormdatabase.getHelper().getProjectsDao();
@@ -304,8 +323,9 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 		    	RefreshProjectsList();
 		    }catch(SQLException e){
 		    	e.printStackTrace();
-		    }
-		    
+		    }*/
+		    delProj = new DialogDeleteProject(allProjectsList, PLA, ProjectsList,this, ormdatabase, proj);
+		    delProj.show(getSupportFragmentManager(), "fileExists");		
 			break;
 		case VIEW_DETAIL_ID:					    
 		    try{
@@ -320,6 +340,11 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 		    }catch(Exception e){
 		    	e.printStackTrace();
 		    }
+			break;
+		case SAVE_PROJECT:
+			globalSaveProj = allProjectsList.get(acmi.position);
+			enterName = new DialogEnterName(globalSaveProj.getProjectName());
+			enterName.show(getSupportFragmentManager(), "saveProg");
 			break;
 		}
 		return super.onContextItemSelected(item);
@@ -362,5 +387,17 @@ public class MainActivity extends FragmentActivity implements GetPathDialogListe
 			              
 	public Object onRetainCustomNonConfigurationInstance() {		
 	    return StartLoadBuild;
+	}
+
+	@Override
+	public void getSaveName(String name) {
+		// TODO Auto-generated method stub
+		if(! new File(SAVE_PATH + "/" + name + ".zml").exists()){
+			saveBuild = new SaveBuild(name,SAVE_PATH +"/tempFile.xml", this, ormdatabase,  globalSaveProj);
+			saveBuild.execute();
+		}else{
+			fileExtsts = new DialogFileExists(name, SAVE_PATH +"/tempFile.xml", this, ormdatabase,  globalSaveProj);
+			fileExtsts.show(getSupportFragmentManager(), "fileExists");			
+		}
 	}
 }

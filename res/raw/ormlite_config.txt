@@ -1,5 +1,5 @@
 #
-# generated on 2015/10/26 04:02:23
+# generated on 2015/12/02 01:53:54
 #
 # --table-start--
 dataClass=com.expertsoft.esmeta.data.LS
@@ -340,6 +340,10 @@ columnName=workres_cost
 # --field-start--
 fieldName=wrTotalCost
 columnName=workres_totalcost
+# --field-end--
+# --field-start--
+fieldName=wrOnOff
+columnName=workres_onoff
 # --field-end--
 # --field-start--
 fieldName=wrPart

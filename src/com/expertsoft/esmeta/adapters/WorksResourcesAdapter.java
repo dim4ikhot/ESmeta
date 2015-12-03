@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.expertsoft.esmeta.R;
 import com.expertsoft.esmeta.data.WorksResources;
@@ -53,11 +54,13 @@ public class WorksResourcesAdapter extends BaseAdapter {
 		if (myview == null){
 			myview = lInflater.inflate(R.layout.work_resource_item, parent, false);
 		}
-		LinearLayout ll = (LinearLayout)myview.findViewById(R.id.wrlayout);		
+		LinearLayout ll = (LinearLayout)myview.findViewById(R.id.wrlayout);	
+		LinearLayout llOnOff = (LinearLayout)myview.findViewById(R.id.wrLayoutOnOff);
 		TextView wrname = (TextView)myview.findViewById(R.id.wrName);
 		TextView wrTotal = (TextView)myview.findViewById(R.id.wrTotalNum);
 		TextView wrCount = (TextView)myview.findViewById(R.id.wrCountsNum);
-		TextView wrCost = (TextView)myview.findViewById(R.id.wrCostsNum);		
+		TextView wrCost = (TextView)myview.findViewById(R.id.wrCostsNum);	
+		ToggleButton onOff = (ToggleButton)myview.findViewById(R.id.tgbtnOnOff);
 						
 		final WorksResources workRes = (WorksResources)  worksResList.get(position);
 		if(workRes.getWrName().length() <= 50){
@@ -71,11 +74,17 @@ public class WorksResourcesAdapter extends BaseAdapter {
 		wrCount.setText(String.valueOf(workRes.getWrCount()));		
 		wrCost.setText(String.valueOf(workRes.getWrCost()));
 		if(globalIterator % 2 == 0){
-			bcolor = context.getResources().getColor(R.color.listItemPositionColor);
+			bcolor = context.getResources().getColor(R.color.listItemPositionColor);			
 		}else{
 			bcolor = context.getResources().getColor(R.color.listItemPositionColor2);
 		}	
+		if(workRes.getWrOnOff() == -1){
+			onOff.setChecked(true);
+		}else{
+			onOff.setChecked(false);
+		}
 		ll.setBackgroundColor(bcolor);
+		llOnOff.setBackgroundColor(bcolor);
 		myview.setTag(workRes);
 		globalIterator++;
 		return myview;		

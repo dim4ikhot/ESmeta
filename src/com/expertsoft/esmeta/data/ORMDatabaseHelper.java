@@ -18,7 +18,7 @@ import com.j256.ormlite.table.TableUtils;
 public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper implements Serializable{
 
 	public static final String DATABASE_NAME = "DATA.db";
-	public static final int DATABASE_VER = 1;
+	public static final int DATABASE_VER = 2;
 	private static final long serialVersionUID = -222864131214757024L;
 	
 	//Our database tables 
@@ -54,8 +54,17 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper implements Serial
 	public void onUpgrade(SQLiteDatabase sqlitedatabase, ConnectionSource connectionSource, int oldVer,
 			int newVer) {
 		// Database update....
-		
-		try{
+		if (newVer == 2){
+			try{
+				Dao<WorksResources, Integer> worksresDao = getWorksResDao();
+				worksresDao.executeRaw("ALTER TABLE 'worksresources' ADD COLUMN workres_onoff INTEGER");
+				worksresDao.updateRaw("UPDATE 'worksresources' SET workres_onoff = -1");
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		/*try{
 			TableUtils.dropTable(connectionSource, Projects.class, true);
 			TableUtils.dropTable(connectionSource, OS.class,true);
 			TableUtils.dropTable(connectionSource, LS.class,true);
@@ -68,7 +77,7 @@ public class ORMDatabaseHelper extends OrmLiteSqliteOpenHelper implements Serial
 		{
 			e.printStackTrace();
 		}	
-		
+		*/
 	}
 	
 	public Dao<Projects, Integer> getProjectsDao() throws SQLException {
