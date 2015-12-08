@@ -55,7 +55,7 @@ public class SaveInXML {
 	}
 	
 	private String getExecString(Date execDate, float countDone){
-		SimpleDateFormat sdf = new SimpleDateFormat("MM.yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM.yyyy");		
 		String str = sdf.format(execDate) + "-" + String.valueOf(countDone).replace(".", ",") + ";";
 		return str;
  	}

@@ -79,11 +79,42 @@ public class FileUtils {
 		File file = new File(filepath);			
 		try{						
 			BufferedInputStream buff = new BufferedInputStream(new FileInputStream(filepath)); 
+			String readbuff = "";						
+			int ch;
+			OutputStreamWriter writer = new OutputStreamWriter(
+					new FileOutputStream(file.getParent()+ "/tempFile.txt"), "UTF-8");
+			while((ch = buff.read()) > -1)						
+			{															
+				//readbuff += lookup[ch];
+				writer.write(lookup[ch]);
+			}
+			buff.close();			
+			//writer.write(readbuff.toString());
+			writer.close();	
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return new File(file.getParent()+ "/tempFile.txt");
+	}
+	
+	//Variant work slowly
+	public File encodeCP866ToUTF82(String filepath, String Charset){
+		File file = new File(filepath);			
+		try{						
+			BufferedInputStream buff = new BufferedInputStream(new FileInputStream(filepath)); 
 			String readbuff = "";
+			String TmpBuff = "";
+			int count250 = 0;
 			int ch;
 			while((ch = buff.read()) > -1)						
 			{											
-				readbuff += lookup[ch];				
+				if(TmpBuff.length() > 5000){
+					count250++;
+					TmpBuff = "";
+				}
+				readbuff += lookup[ch];
+				TmpBuff += lookup[ch];
 			}
 			buff.close();
 			OutputStreamWriter writer = new OutputStreamWriter(
